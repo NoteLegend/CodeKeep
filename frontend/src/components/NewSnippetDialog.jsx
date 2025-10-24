@@ -51,7 +51,7 @@ const NewSnippetDialog = ({ open, onOpenChange, collections, onSnippetCreated })
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.title.trim() || !formData.code.trim() || !formData.collection) {
+    if (!formData.title.trim() || !formData.code.trim() ) {
       setError('Please fill in all required fields');
       return;
     }
