@@ -60,7 +60,12 @@ const NewSnippetDialog = ({ open, onOpenChange, collections, onSnippetCreated })
       setLoading(true);
       setError('');
       
-      const response = await snippetsAPI.create(formData);
+      const payload = {
+                ...formData,
+                collection: formData.collection || undefined 
+              };
+        
+              const response = await snippetsAPI.create(payload);
       onSnippetCreated(response.data.data);
       
       // Reset form
@@ -174,12 +179,15 @@ const NewSnippetDialog = ({ open, onOpenChange, collections, onSnippetCreated })
                 <SelectValue placeholder="Select a collection" />
               </SelectTrigger>
               <SelectContent>
-                {collections.map((collection) => (
-                  <SelectItem key={collection._id} value={collection._id}>
+                <SelectItem value="">
+                  <em>Uncategorized</em>
+                    </SelectItem>
+                      {collections.map((collection) => (
+                    <SelectItem key={collection._id} value={collection._id}>
                     {collection.name}
                   </SelectItem>
-                ))}
-              </SelectContent>
+                 ))}
+               </SelectContent>
             </Select>
           </div>
 
